@@ -3,8 +3,8 @@ function LoginSuccess(){
    
     return(
         <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
-            <div className="flex justify-center items-center w-full h-full">
-                <div className="flex flex-col items-center gap-5 w-fit bg-white rounded-xl p-6 md:p-8 md:pb-12 max-w-[435px]">
+            <div className="flex justify-center items-center w-full h-full px-4">
+                <div className="flex flex-col items-center gap-5 w-fit bg-white rounded-xl pt-3 p-8 md:pb-12 max-w-full lg:max-w-xl">
                     <button type="button" className="flex w-full justify-end text-3xl font-medium text-neutral-900 ">
                         <a href="/">
                             x
@@ -18,7 +18,7 @@ function LoginSuccess(){
                             </svg>
                         </div>
                         <div className="flex flex-col gap-4 text-center">
-                            <p className="text-3xl font-semibold text-success-400">
+                            <p className="text-2xl font-semibold text-success-400 md:text-3xl">
                                 Successful Login
                             </p>
                         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import callApi from "../api";
 import LoginSuccess from "./LoginSuccess";
@@ -106,8 +106,8 @@ function FormLogin(){
             {notiSuccess && <LoginSuccess/>}
             {forgotPassword &&
             <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
-                <div className="flex justify-center items-center w-full h-full">
-                    <div className="flex flex-col items-center gap-5 w-1/2 bg-white rounded-xl p-6 md:p-8 md:pb-12 max-w-[435px]">
+                <div className="flex justify-center items-center w-full h-full px-4">
+                    <div className="flex flex-col items-center gap-5 w-full bg-white rounded-xl p-6 md:p-8 md:pb-12 md:w-1/2 max-w-full lg:max-w-xl">
                         <button type="button" onClick={handleClick} className="flex w-full justify-end text-3xl font-medium text-neutral-900 ">
                             X
                         </button>
