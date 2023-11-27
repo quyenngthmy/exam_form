@@ -97,8 +97,8 @@ module.exports = {
       inject: "body",
       chunks: ['index'],
     }),
-      new MiniCssExtractPlugin({
-        filename: "static/css/[name].min.css",
-      }),
+    new MiniCssExtractPlugin({
+      filename: "static/css/[name].min.css",
+    }),
   ]
 };

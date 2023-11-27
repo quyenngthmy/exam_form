@@ -1,13 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function LoginSuccess(getUser){
     return(
         <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
             <div className="flex justify-center items-center w-full h-full px-4">
                 <div className="flex flex-col items-center gap-5 w-fit bg-white rounded-xl pt-3 p-8 md:pb-12 max-w-full lg:max-w-xl">
                     <button type="button" className="flex w-full justify-end text-3xl font-medium text-neutral-900 ">
-                        <a href="./">
-                            x
-                        </a>
+                        <Link to="/user">x</Link>
                     </button>
                     <div className="flex flex-col items-center gap-5 md:p-10">
                         <div className="w-[60px] h-[60px]">
