@@ -16,9 +16,9 @@
         @apply relative bg-transparent;
         & ~ .focus-bg:before,
         & ~ .focus-bg:after{content: ""; position: absolute; left: 0; top: 0; width: 0; height: 0; background-color: #ededed; transition: 0.3s; z-index: -1;}
-        &:focus ~ .focus-bg:before{transition: 0.3s; width: 50%; height: 100%;}
+        &:focus ~ .focus-bg:before{transition: .7s; width: 50%; height: 100%; transition-timing-function: ease-in;}
         & ~ .focus-bg:after{left: auto; right: 0; top: auto; bottom: 0;}
-        &:focus ~ .focus-bg:after{transition: 0.3s; width: 50%; height: 100%;}
+        &:focus ~ .focus-bg:after{transition: .7s; width: 50%; height: 100%; transition-timing-function: ease-in;}
     }
 }
 

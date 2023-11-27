@@ -7,7 +7,8 @@ function FormRegister(){
     const REGEX_PASSWORD = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/;
     const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
     const REGEX_PHONE = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
-    const REGEX_TEXT = /^[a-zA-ZĐđÀ-ỹ\s]{2,30}$/;
+    const REGEX_TEXT = /^[a-zA-ZĐđÀ-ỹ\s]{1,30}$/;
+    const REGEX_TEXT_NUMBER = /^[a-zA-Z0-9ĐđÀ-ỹ\s]+$/u;
     
     const {
         register,
@@ -117,7 +118,7 @@ function FormRegister(){
                             {...register("username", {
                                 required: "Username is required.",
                                 pattern: {
-                                    value: REGEX_TEXT,
+                                    value: REGEX_TEXT_NUMBER,
                                     message: "Username is not valid."
                                 }
                             })}
@@ -225,7 +226,7 @@ function FormRegister(){
                             placeholder="Address"
                             {...register("address", {
                                 pattern: {
-                                    value: /^[a-zA-Z0-9ĐđÀ-ỹ\s]+$/u,
+                                    value: REGEX_TEXT_NUMBER,
                                     message: "Address is not valid."
                                 }
                             })}

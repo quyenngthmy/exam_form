@@ -10,16 +10,19 @@ function FormLogin(){
         register,
         handleSubmit,
         formState: { errors },
-        getValues
+        getValues,
+        setValue
       } = useForm();
-
+    const initialValues = {username: "", password: ""};
+    const [formValues, setFormValues] = useState(initialValues);
     const [notiSuccess, setNotiSuccess] = useState(false);
     const [notiFail, setNotiFail] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
     const [getData, setGetData] = useState({});
 
     const onSubmit = () => {
-        const formValues = getValues();
+        const values = getValues();
+        setFormValues(values);
         if(formValues.terms) {
             localStorage.setItem("inforUser", JSON.stringify(formValues));
         }
@@ -40,7 +43,6 @@ function FormLogin(){
         setGetData(APIGetData)
     }
 
-
     const handleClick = () => {
         setForgotPassword(!forgotPassword);
     };
@@ -49,7 +51,9 @@ function FormLogin(){
         callAPI();
         const getUser = localStorage.getItem("inforUser");
         if(getUser) {
-            console.log(getUser);
+            const parseUser = JSON.parse(getUser);
+            setValue('username', parseUser.username)
+            setValue('password', parseUser.password)
         }
     }, []);
 
@@ -122,7 +126,7 @@ function FormLogin(){
                 Sign in
             </button>
             {notiFail && <LoginFail/>}
-            {notiSuccess && <LoginSuccess/>}
+            {notiSuccess && <LoginSuccess formValues={formValues}/>}
             {forgotPassword &&
             <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
                 <div className="flex justify-center items-center w-full h-full px-4">

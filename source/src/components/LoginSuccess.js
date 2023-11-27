@@ -1,6 +1,5 @@
 import React from "react";
-function LoginSuccess(){
-   
+function LoginSuccess(getUser){
     return(
         <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
             <div className="flex justify-center items-center w-full h-full px-4">
@@ -21,6 +20,7 @@ function LoginSuccess(){
                             <p className="text-2xl font-semibold text-success-400 md:text-3xl">
                                 Successful Login
                             </p>
+                            <p>You just logged in with username: <span className="font-medium"> {getUser.formValues.username}</span></p>
                         </div>
                     </div>
                 </div>

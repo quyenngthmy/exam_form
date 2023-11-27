@@ -22,45 +22,47 @@ function RegisterSuccess(inforUser){
                             </p>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-3 text-neutral-900">
-                        <p className="text-xl font-medium">
-                            Your account information
-                        </p>
-                        <div className="grid grid-cols-2 gap-3 text-base w-full">
-                            <p>
-                                Fullname:
+                    <div className="flex justify-center w-full">
+                        <div className="flex flex-col gap-3 text-neutral-900 w-full">
+                            <p className="text-xl font-medium">
+                                Your account information
                             </p>
-                            <p>
-                                {inforUser.value.firstname} {inforUser.value.lastname}
-                            </p>
-                            <p>
-                                Username:
-                            </p>
-                            <p>
-                                {inforUser.value.username}
-                            </p>
-                            <p>
-                                Email:
-                            </p>
-                            <p>
-                                {inforUser.value.email}
-                            </p>
-                            <p>
-                                Phone:
-                            </p>
-                            <p>
-                                {inforUser.value.phone}
-                            </p>
-                            {inforUser.value.address &&
-                                <>
-                                    <p>
-                                    Address:
-                                    </p>
-                                    <p>
-                                        {inforUser.value.address}
-                                    </p>
-                                </>
-                            }
+                            <div className="grid grid-cols-3 gap-3 text-base w-full">
+                                <p>
+                                    Fullname:
+                                </p>
+                                <p className="break-all col-span-2">
+                                    {inforUser.value.firstname} {inforUser.value.lastname}
+                                </p>
+                                <p>
+                                    Username:
+                                </p>
+                                <p className="break-all col-span-2">
+                                    {inforUser.value.username}
+                                </p>
+                                <p>
+                                    Email:
+                                </p>
+                                <p className="break-all col-span-2">
+                                    {inforUser.value.email}
+                                </p>
+                                <p>
+                                    Phone:
+                                </p>
+                                <p className="break-all col-span-2">
+                                    {inforUser.value.phone}
+                                </p>
+                                {inforUser.value.address &&
+                                    <>
+                                        <p>
+                                        Address:
+                                        </p>
+                                        <p className="break-all col-span-2">
+                                            {inforUser.value.address}
+                                        </p>
+                                    </>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
