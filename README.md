@@ -3,8 +3,8 @@
 Login page (the form includes username, password, remember checkbox & a link forgot password)
 
 To login:
-- Fill in the correct information of the existing username
-- Fill any password
+- Fill in the correct information of the existing username: username is not case sensitive.
+- Fill in any password with at least 6 required characters, containing at least one uppercase letter, lowercase letter, number and special symbol.
 
 Register page (The form includes username, password, first name, last name, email, phone, address ...)
 

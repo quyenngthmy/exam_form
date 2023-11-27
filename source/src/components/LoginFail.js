@@ -2,7 +2,7 @@ import React from "react";
 function LoginFail(){
     return(
         <div className="errorMsg">
-            Sorry, we couldn't find your account.
+            Username or password not correct. Please check again.
         </div>
     )
 }

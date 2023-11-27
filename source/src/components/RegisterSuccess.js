@@ -5,7 +5,7 @@ function RegisterSuccess(inforUser){
             <div className="flex justify-center items-center w-full h-full px-4">
                 <div className="flex flex-col gap-5 w-full bg-white rounded-xl p-6 md:p-8 md:pb-12 max-w-full lg:max-w-xl">
                     <button type="button" className="flex w-full justify-end text-3xl font-medium text-neutral-900 ">
-                        <a href="/">
+                        <a href="./">
                             x
                         </a>
                     </button>

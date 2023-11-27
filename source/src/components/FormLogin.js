@@ -1,46 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import callApi from "../api";
 import LoginSuccess from "./LoginSuccess";
 import LoginFail from "./LoginFail";
 import ForgotPassword from "./ForgotPassword";
 function FormLogin(){
+    const REGEX_PASSWORD = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/;
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        getValues
       } = useForm();
 
-    const initialValues = {username: "", password: ""};
-    const [formValues, setFormValues] = useState(initialValues);
     const [notiSuccess, setNotiSuccess] = useState(false);
     const [notiFail, setNotiFail] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
+    const [getData, setGetData] = useState({});
 
-    const onSubmit = async () => {
-        // call APi get data
-        let getData = await callApi(`/users`,"GET")
-        console.log(getData);
+    const onSubmit = () => {
+        const formValues = getValues();
+        if(formValues.terms) {
+            localStorage.setItem("inforUser", JSON.stringify(formValues));
+        }
         // filter user
-        let getDataUser = getData.data.filter(user => user.username == formValues.username)
-        if(getDataUser.length > 0 && formValues.password != "") {
+        let getDataUser = getData.data.filter(user => user.username.toLowerCase() == formValues.username.toLowerCase())
+        if(getDataUser.length > 0 && formValues.password.length >= 6 && REGEX_PASSWORD.test(formValues.password)) {
             setNotiSuccess(true);
             setNotiFail(false);
         } else {
             setNotiFail(true);
             setNotiSuccess(false);
         }
-       
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues({ ...formValues, [name]: value });
-    };
+    // call APi get data
+    const callAPI = async () => {
+        let APIGetData = await callApi(`/users`,"GET");
+        setGetData(APIGetData)
+    }
+
 
     const handleClick = () => {
         setForgotPassword(!forgotPassword);
     };
+
+    useEffect(() => {
+        callAPI();
+        const getUser = localStorage.getItem("inforUser");
+        if(getUser) {
+            console.log(getUser);
+        }
+    }, []);
 
     return(
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 md:gap-6" action="#">
@@ -57,8 +68,6 @@ function FormLogin(){
                         {...register("username", {
                             required: true,
                         })}
-                        value={formValues.username}
-                        onChange={handleChange}
                     />
                     <span className="focus-bg"></span>
                 </div>
@@ -78,9 +87,14 @@ function FormLogin(){
                         placeholder="Password"
                         {...register("password", {
                             required: true,
+                            validate: {
+                                checkLength: (value) => value.length >= 6,
+                                matchPattern: (value) =>
+                                REGEX_PASSWORD.test(
+                                    value
+                                )
+                            }
                         })}
-                        value={formValues.password}
-                        onChange={handleChange}
                     />
                     <span className="focus-bg"></span>
                 </div>
@@ -91,7 +105,12 @@ function FormLogin(){
             <div className="flex items-center justify-between">
                 <div className="flex gap-3 items-start">
                     <button className="flex items-center h-5">
-                        <input id="remember" aria-describedby="remember" type="checkbox" className="cursor-pointer w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required=""/>
+                        <input id="remember"
+                        aria-describedby="remember" 
+                        type="checkbox" 
+                        className="cursor-pointer w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                        {...register("terms")}
+                        />
                     </button>
                     <label htmlFor="remember" className="text-sm text-gray-500 dark:text-gray-300 cursor-pointer">Remember me</label>
                 </div>

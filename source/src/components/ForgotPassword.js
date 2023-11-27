@@ -4,14 +4,14 @@ function ForgotPassword(){
     const [submitPassword, setSubmitPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const REGEX = /^\S+@\S+\.\S+$/;
+    const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
 
     const handleSubmitPassword = (e) => {
         if(email == "") {
             setMessage("Please type your email");
             setSubmitPassword(false);
         } else {
-            if(!REGEX.test(email)) {
+            if(!REGEX_EMAIL.test(email)) {
                 setMessage("Email is not valid.");
                 setSubmitPassword(false);
             }
