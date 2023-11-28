@@ -1,12 +1,13 @@
 import React from "react";
 
 function RegisterSuccess(userInfo){
+    console.log(userInfo);
     return(
         <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
             <div className="flex justify-center items-center w-full h-full px-4">
                 <div className="flex flex-col gap-5 w-full bg-white rounded-xl p-6 md:p-8 md:pb-12 max-w-full lg:max-w-xl">
                     <button type="button" className="flex w-full justify-end text-3xl font-medium text-neutral-900 ">
-                        <a href="./user.html">x</a>
+                        <a href="./">x</a>
                     </button>
                     <div className="flex flex-col items-center gap-5 md:pt-10">
                         <div className="w-[60px] h-[60px]">
@@ -51,15 +52,17 @@ function RegisterSuccess(userInfo){
                                 <p className="break-all col-span-2">
                                     {userInfo.value.phone}
                                 </p>
-                                {userInfo.value.address &&
+                                {userInfo.value.address.suite != "" || userInfo.value.address.street != "" || userInfo.value.address.city != "" ?
                                     <>
                                         <p>
                                         Address:
                                         </p>
                                         <p className="break-all col-span-2">
-                                            {userInfo.value.address}
+                                            {userInfo.value.address.suite} {userInfo.value.address.street} {userInfo.value.address.city}
                                         </p>
                                     </>
+                                    :
+                                    <></>
                                 }
                             </div>
                         </div>

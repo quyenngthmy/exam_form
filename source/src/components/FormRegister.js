@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import RegisterSuccess from "./RegisterSuccess";
 import Spinner from "./Spinner";
+import callApi from "../api";
 
 function FormRegister(){
     const REGEX_PASSWORD = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/;
@@ -10,8 +11,18 @@ function FormRegister(){
     const REGEX_TEXT = /^[a-zA-ZĐđÀ-ỹ\s]{1,30}$/;
     const REGEX_TEXT_NUMBER = /^[a-zA-Z0-9ĐđÀ-ỹ\s]+$/u;
    
-    const initialValues = {username: "", firstname: "", lastname: "", email: "", password: "", phone: "", address: ""};
-    const [formValues, setFormValues] = useState(initialValues);
+    const initialValues = {
+        username: "", 
+        firstname: "", 
+        lastname: "", 
+        email: "", 
+        password: "", 
+        phone: "", 
+        address: {suite: "",
+        street: "",
+        city: ""}
+    };
+    const [formValues, setFormValues] = useState({});
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -26,21 +37,51 @@ function FormRegister(){
     } = useForm({
         mode: "onBlur",
         defaultValues: {
-            formValues: ""
-        }
+            username: "", 
+            firstname: "", 
+            lastname: "", 
+            email: "", 
+            password: "", 
+            phone: "", 
+            address: {suite: "",
+            street: "",
+            city: ""}
+            }
     });
+
+    // dùng để check confirm password
     const password = useRef({});
     password.current = watch("password", "");
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         const values = getValues();
         setFormValues(values)
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);;
-            setSuccess(true);
-        }, 1000);
-        reset();
+        // api post thông tin user vừa đăng kí
+        let APIPostData = await callApi(`/users`,"POST",
+       {
+           "name": values.firstname + " " + values.lastname,
+           "username": values.username,
+           "email": values.email,
+           "phone": values.phone,
+           "address": {
+                suite: values.address.suite,
+                street: values.address.street,
+                city: values.address.city,
+           }
+       })
+
+       .then((res) => {
+           setLoading(true);
+           setTimeout(() => {
+               setLoading(false);;
+               setSuccess(true);
+           }, 1000);
+           reset();
+       })
+       .catch((err) => {
+           console.log(err);
+           
+       });
     };
 
    // when formState is not subscrbeid, you can supply formState as argument
@@ -94,43 +135,26 @@ function FormRegister(){
                                     />
                                     {errors.lastname && <p className="errorMsg">{errors.lastname.message}</p>}
                                 </div>
-                                <div className={errors.email &&  "error" }>
-                                    <label htmlFor="email" className="label-input label-input-required">
-                                        Email
-                                    </label>
-                                    <input className="input-el"
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder="Email"
-                                        {...register("email", {
-                                            required: "Email is required.",
-                                            pattern: {
-                                                value: REGEX_EMAIL,
-                                                message: "Email is not valid."
-                                            }
-                                        })}
-                                    />
-                                    {errors.email && <p className="errorMsg">{errors.email.message}</p>}
-                                </div>
-                                <div className={errors.username &&  "error" }>
-                                    <label htmlFor="username" className="label-input label-input-required">
-                                        Username
-                                    </label>
-                                    <input className="input-el"
-                                        type="text"
-                                        name="username"
-                                        id="username"
-                                        placeholder="Username"
-                                        {...register("username", {
-                                            required: "Username is required.",
-                                            pattern: {
-                                                value: REGEX_TEXT_NUMBER,
-                                                message: "Username is not valid."
-                                            }
-                                        })}
-                                    />
-                                    {errors.username && <p className="errorMsg">{errors.username.message}</p>}
+                                <div className="lg:col-span-2">
+                                    <div className={errors.username &&  "error" }>
+                                        <label htmlFor="username" className="label-input label-input-required">
+                                            Username
+                                        </label>
+                                        <input className="input-el"
+                                            type="text"
+                                            name="username"
+                                            id="username"
+                                            placeholder="Username"
+                                            {...register("username", {
+                                                required: "Username is required.",
+                                                pattern: {
+                                                    value: REGEX_TEXT_NUMBER,
+                                                    message: "Username is not valid."
+                                                }
+                                            })}
+                                        />
+                                        {errors.username && <p className="errorMsg">{errors.username.message}</p>}
+                                    </div>
                                 </div>
                                 <div className={errors.password &&  "error" }>
                                     <label htmlFor="password" className="label-input label-input-required">
@@ -193,42 +217,99 @@ function FormRegister(){
                                         <p className="errorMsg">The passwords do not match</p>
                                     }
                                 </div>
-                                <div className={errors.phone &&  "error" }>
-                                    <label htmlFor="phone" className="label-input label-input-required">
-                                        Telephone number
-                                    </label>
-                                    <input className="input-el"
-                                        type="tel"
-                                        name="phone"
-                                        id="phone"
-                                        placeholder="Telephone number"
-                                        {...register("phone", {
-                                            required: "Telephone number is required.",
-                                            pattern: {
-                                                value: REGEX_PHONE,
-                                                message: "Telephone number is not valid."
-                                            }
-                                        })}
-                                    />
-                                    {errors.phone && <p className="errorMsg">{errors.phone.message}</p>}
+                                <div className="lg:col-span-2">
+                                    <div className={errors.email &&  "error" }>
+                                        <label htmlFor="email" className="label-input label-input-required">
+                                            Email
+                                        </label>
+                                        <input className="input-el"
+                                            type="text"
+                                            name="email"
+                                            id="email"
+                                            placeholder="Email"
+                                            {...register("email", {
+                                                required: "Email is required.",
+                                                pattern: {
+                                                    value: REGEX_EMAIL,
+                                                    message: "Email is not valid."
+                                                }
+                                            })}
+                                        />
+                                        {errors.email && <p className="errorMsg">{errors.email.message}</p>}
+                                    </div>
                                 </div>
-                                <div className={errors.address &&  "error" }>
-                                    <label htmlFor="address" className="label-input">
+                                <div className="lg:col-span-2">
+                                    <div className={errors.phone &&  "error" }>
+                                        <label htmlFor="phone" className="label-input label-input-required">
+                                            Telephone number
+                                        </label>
+                                        <input className="input-el"
+                                            type="tel"
+                                            name="phone"
+                                            id="phone"
+                                            placeholder="Telephone number"
+                                            {...register("phone", {
+                                                required: "Telephone number is required.",
+                                                pattern: {
+                                                    value: REGEX_PHONE,
+                                                    message: "Telephone number is not valid."
+                                                }
+                                            })}
+                                        />
+                                        {errors.phone && <p className="errorMsg">{errors.phone.message}</p>}
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-2">
+                                    <label className="label-input">
                                         Address
                                     </label>
-                                    <input className="input-el"
-                                        type="text"
-                                        name="address"
-                                        id="address"
-                                        placeholder="Address"
-                                        {...register("address", {
-                                            pattern: {
-                                                value: REGEX_TEXT_NUMBER,
-                                                message: "Address is not valid."
-                                            }
-                                        })}
-                                    />
-                                    {errors.address && <p className="errorMsg">{errors.address.message}</p>}
+                                    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+                                        <div className={errors.address?.suite && "error" }>
+                                            <input className="input-el"
+                                                type="text"
+                                                name="suite"
+                                                id="suite"
+                                                placeholder="Suite"
+                                                {...register("address.suite", {
+                                                    pattern: {
+                                                        value: REGEX_TEXT_NUMBER,
+                                                        message: "Suite is not valid."
+                                                    }
+                                                })}
+                                            />
+                                            {errors.address?.suite && <p className="errorMsg">{errors.address?.suite.message}</p>}
+                                        </div>
+                                        <div className={errors.address?.street && "error" }>
+                                            <input className="input-el"
+                                                type="text"
+                                                name="street"
+                                                id="street"
+                                                placeholder="Street"
+                                                {...register("address.street", {
+                                                    pattern: {
+                                                        value: REGEX_TEXT_NUMBER,
+                                                        message: "Street is not valid."
+                                                    }
+                                                })}
+                                            />
+                                            {errors.address?.street && <p className="errorMsg">{errors.address?.street.message}</p>}
+                                        </div>
+                                        <div className={errors.address?.city && "error" }>
+                                            <input className="input-el"
+                                                type="text"
+                                                name="city"
+                                                id="city"
+                                                placeholder="City"
+                                                {...register("address.city", {
+                                                    pattern: {
+                                                        value: REGEX_TEXT_NUMBER,
+                                                        message: "City is not valid."
+                                                    }
+                                                })}
+                                            />
+                                            {errors.address?.city && <p className="errorMsg">{errors.address?.city.message}</p>}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div>
