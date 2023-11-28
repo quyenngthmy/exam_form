@@ -22,8 +22,20 @@ User page: Displays recently logged in user information.
 Link User page: https://quyenngthmy.github.io/login_form/build/user.html
 
 
-Link API: https://jsonplaceholder.typicode.com/users
+Link dummy user API: https://jsonplaceholder.typicode.com/users
 
+User list to test:
+1. Bret
+2. Antonette
+3. Samantha
+4. Karianne
+5. Kamren
+6. Leopoldo_Corkery
+7. Elwyn.Skiles
+8. Maxime_Nienow
+9. Delphine
+10. Moriah.Stanton
+ 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
