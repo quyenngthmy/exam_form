@@ -18,7 +18,7 @@ function LoginSuccess(getUser){
                             <p className="text-2xl font-semibold text-success-400 md:text-3xl">
                                 Successful Login
                             </p>
-                            <p>You just logged in with username: <span className="font-medium"> {getUser.formValues.username}</span></p>
+                            <p>You just logged in with username: <span className="font-medium"> {getUser.formValues.username.toLowerCase().trim()}</span></p>
                         </div>
                     </div>
                 </div>

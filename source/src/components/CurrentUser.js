@@ -79,7 +79,7 @@ function CurrentUser(){
                                                             Address:
                                                         </p>
                                                         <p className="break-all col-span-2 md:col-span-3 xl:col-span-4">
-                                                            {address.join(", ")}
+                                                            {address.filter(str => str !== "").join(", ")}
                                                         </p>
                                                     </div>
                                                 }

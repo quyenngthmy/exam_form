@@ -6,7 +6,6 @@ export default function callApi(endpoint, method = "GET", body) {
   return axios({
     method,
     url: `${baseURL}${endpoint}`,
-    // contentType: "application/json",
     data: body,
   })
   

@@ -11,10 +11,19 @@ function FormLogin(){
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, touchedFields },
         getValues,
-        setValue
-      } = useForm();
+        setValue,
+        getFieldState
+      } = useForm({
+        mode: "onBlur",
+        defaultValues: {
+            username: "", 
+            password: "", 
+            remember: false, 
+        }
+    });
+
     const initialValues = {username: "", password: "", remember: false};
     const [formValues, setFormValues] = useState(initialValues);
     const [notiSuccess, setNotiSuccess] = useState(false);
@@ -28,18 +37,23 @@ function FormLogin(){
         setFormValues(values);
         // filter user
         let getDataUser = getData.data.filter(user => user.username.toLowerCase().trim() == formValues.username.toLowerCase().trim())
-        localStorage.setItem("currentUser", JSON.stringify(getDataUser));
         if(getDataUser.length > 0 && formValues.password.length >= 6 && REGEX_PASSWORD.test(formValues.password)) {
             setNotiSuccess(true);
             setNotiFail(false);
+            localStorage.setItem("currentUser", JSON.stringify(getDataUser));
             if(formValues.remember) {
                 localStorage.setItem("rememberUser", JSON.stringify(formValues));
+            } else {
+                localStorage.removeItem("rememberUser");
             }
         } else {
             setNotiFail(true);
             setNotiSuccess(false);
         }
     };
+
+   // when formState is not subscrbeid, you can supply formState as argument
+   getFieldState(formValues, touchedFields);
 
     // call APi get data
     const callAPI = async () => {
@@ -93,15 +107,17 @@ function FormLogin(){
                                     <label htmlFor="username" className="label-input">
                                         Username
                                     </label>
-                                    <input className="input-el"
-                                        type="text"
-                                        name="username"
-                                        id="username"
-                                        placeholder="Username"
-                                        {...register("username", {
-                                            required: true,
-                                        })}
-                                    />
+                                    <div className={getFieldState("username").isTouched ? "validate" : ""}>
+                                        <input className="input-el"
+                                            type="text"
+                                            name="username"
+                                            id="username"
+                                            placeholder="Username"
+                                            {...register("username", {
+                                                required: true,
+                                            })}
+                                        />
+                                    </div>
                                     {errors.username?.type === "required" && (
                                         <p className="errorMsg">Username is required.</p>
                                     )}

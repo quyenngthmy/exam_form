@@ -49,11 +49,12 @@ function FormRegister(){
     const values = getValues();
     const onSubmit = async () => {
         setFormValues(values)
+
         // api post thông tin user vừa đăng kí
         let APIPostData = await callApi(`/users`,"POST",
        {
            "name": values.firstname + " " + values.lastname,
-           "username": values.username,
+           "username": values.username.toLowerCase().trim(),
            "email": values.email,
            "phone": values.phone,
            "address": {
@@ -134,19 +135,21 @@ function FormRegister(){
                                         <label htmlFor="username" className="label-input label-input-required">
                                             Username
                                         </label>
-                                        <input className="input-el"
-                                            type="text"
-                                            name="username"
-                                            id="username"
-                                            placeholder="Username"
-                                            {...register("username", {
-                                                required: "Username is required.",
-                                                pattern: {
-                                                    value: REGEX_USERNAME,
-                                                    message: "Username is not valid."
-                                                }
-                                            })}
-                                        />
+                                        <div className={getFieldState("username").isTouched ? "validate" : ""}>
+                                            <input className="input-el"
+                                                type="text"
+                                                name="username"
+                                                id="username"
+                                                placeholder="Username"
+                                                {...register("username", {
+                                                    required: "Username is required.",
+                                                    pattern: {
+                                                        value: REGEX_USERNAME,
+                                                        message: "Username is not valid."
+                                                    }
+                                                })}
+                                            />
+                                        </div>
                                         {errors.username && <p className="errorMsg">{errors.username.message}</p>}
                                     </div>
                                 </div>
