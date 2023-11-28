@@ -9,7 +9,7 @@ To login:
 - Fill in any password with at least 6 required characters, containing at least one uppercase letter, lowercase letter, number and special symbol.
 - Because it is an emulator, you only need the correct username and enter any password.
   
-Register page (The form includes username, password, first name, last name, email, phone, address 
+Register page (The form includes username, password, first name, last name, email, phone, address )
 
 Link Register page: https://quyenngthmy.github.io/login_form/build/register.html
 
