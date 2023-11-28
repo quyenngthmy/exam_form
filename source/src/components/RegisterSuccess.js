@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function RegisterSuccess(userInfo){
     return(
@@ -7,7 +6,7 @@ function RegisterSuccess(userInfo){
             <div className="flex justify-center items-center w-full h-full px-4">
                 <div className="flex flex-col gap-5 w-full bg-white rounded-xl p-6 md:p-8 md:pb-12 max-w-full lg:max-w-xl">
                     <button type="button" className="flex w-full justify-end text-3xl font-medium text-neutral-900 ">
-                        <Link to="/user">x</Link>
+                        <a href="./user.html">x</a>
                     </button>
                     <div className="flex flex-col items-center gap-5 md:pt-10">
                         <div className="w-[60px] h-[60px]">

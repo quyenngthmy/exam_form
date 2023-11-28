@@ -1,5 +1,5 @@
 {
-  "name": "form-register",
+  "name": "login-form",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -61,6 +61,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.3.5",
+    "copy-webpack-plugin": "^11.0.0",
     "jquery": "^3.6.4",
     "react-hook-form": "^7.48.2",
     "redux": "^4.2.1",

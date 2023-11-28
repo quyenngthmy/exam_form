@@ -12,10 +12,7 @@ if (document.getElementById("form-login")) {
   const formRoot = createRoot(formLogin);
   formRoot.render(
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FormLogin />} />
-        <Route path="/user" element={<CurrentUser />} />
-      </Routes>
+      <FormLogin />
     </BrowserRouter>
   );
 }
@@ -25,10 +22,17 @@ if (document.getElementById("form-register")) {
   const formRoot = createRoot(formRegister);
   formRoot.render(
     <BrowserRouter>
-      <Routes>
-        <Route path="/register.html" element={<FormRegister />} />
-        <Route path="/user" element={<CurrentUser />} />
-      </Routes>
+        <FormRegister />
+    </BrowserRouter>
+  );
+}
+
+if (document.getElementById("user")) {
+  const user = document.getElementById("user");
+  const formRoot = createRoot(user);
+  formRoot.render(
+    <BrowserRouter>
+        <CurrentUser />
     </BrowserRouter>
   );
 }
