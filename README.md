@@ -35,7 +35,14 @@ User list to test:
 8. Maxime_Nienow
 9. Delphine
 10. Moriah.Stanton
- 
+
+# Programing
+- Languages: JavaScript
+- Web client: HTML (HTML5), CSS (CSS3, BEM, SCSS, Responsive, Flexbox, Grid, Animation), DOM (Document Object Model)
+- Framework/Library: Webpack, React, NodeJS, Axios, SCSS, Tailwind
+- SCM: GitHub
+- Other: RESTful API, React Hooks, npm, babel
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
