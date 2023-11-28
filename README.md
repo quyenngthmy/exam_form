@@ -12,6 +12,8 @@ To register:
 - Fill in the required information including username, password, full name, email, phone
 - Address is not required
 
+User page: Displays recently logged in user information
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
