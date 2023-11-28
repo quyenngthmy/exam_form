@@ -1,7 +1,8 @@
 import React from "react";
 
 function RegisterSuccess(userInfo){
-    console.log(userInfo);
+    const address = [userInfo.value.address.suite, userInfo.value.address.street, userInfo.value.address.city, userInfo.value.address.zipcode]
+    const fullAddress = address.join(", ");
     return(
         <div className="fixed bg-black/10 inset-0 mx-auto w-full h-full z-50">
             <div className="flex justify-center items-center w-full h-full px-4">
@@ -52,17 +53,15 @@ function RegisterSuccess(userInfo){
                                 <p className="break-all col-span-2">
                                     {userInfo.value.phone}
                                 </p>
-                                {userInfo.value.address.suite != "" || userInfo.value.address.street != "" || userInfo.value.address.city != "" ?
+                                {fullAddress != "" &&
                                     <>
                                         <p>
                                         Address:
                                         </p>
                                         <p className="break-all col-span-2">
-                                            {userInfo.value.address.suite} {userInfo.value.address.street} {userInfo.value.address.city} {userInfo.value.address.zipcode}
+                                            {fullAddress}
                                         </p>
                                     </>
-                                    :
-                                    <></>
                                 }
                             </div>
                         </div>

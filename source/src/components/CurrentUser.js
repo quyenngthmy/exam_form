@@ -7,7 +7,6 @@ function CurrentUser(){
     const handleLogout = () => {
         localStorage.setItem("currentUser", "");
     }
-
     return(
         <div className="mx-auto w-full xl:max-w-7xl">
             <div className="flex flex-col items-center justify-center p-4 min-h-screen lg:p-8">
@@ -31,6 +30,7 @@ function CurrentUser(){
                             ?
                                 <div className="flex w-full">
                                     { parseUser.map((user, key) => {
+                                        const address = [user.address.suite, user.address.street, user.address.city]
                                         return (
                                             <div key={key} className="flex flex-col gap-3 text-base w-full">
                                                 {user.name && 
@@ -79,7 +79,17 @@ function CurrentUser(){
                                                             Address:
                                                         </p>
                                                         <p className="break-all col-span-2 md:col-span-3 xl:col-span-4">
-                                                            {user.address.suite}, {user.address.street}, {user.address.city}, {user.address.zipcode}
+                                                            {address.join(", ")}
+                                                        </p>
+                                                    </div>
+                                                }
+                                                {user.address.zipcode && 
+                                                    <div className="grid grid-cols-3 gap-3 md:grid-cols-4 xl:grid-cols-5">
+                                                        <p>
+                                                            Zipcode:
+                                                        </p>
+                                                        <p className="break-all col-span-2 md:col-span-3 xl:col-span-4">
+                                                            {user.address.zipcode}
                                                         </p>
                                                     </div>
                                                 }

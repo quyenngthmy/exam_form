@@ -26,15 +26,15 @@ function FormLogin(){
     const onSubmit = () => {
         const values = getValues();
         setFormValues(values);
-        if(formValues.remember) {
-            localStorage.setItem("rememberUser", JSON.stringify(formValues));
-        }
         // filter user
         let getDataUser = getData.data.filter(user => user.username.toLowerCase().trim() == formValues.username.toLowerCase().trim())
         localStorage.setItem("currentUser", JSON.stringify(getDataUser));
         if(getDataUser.length > 0 && formValues.password.length >= 6 && REGEX_PASSWORD.test(formValues.password)) {
             setNotiSuccess(true);
             setNotiFail(false);
+            if(formValues.remember) {
+                localStorage.setItem("rememberUser", JSON.stringify(formValues));
+            }
         } else {
             setNotiFail(true);
             setNotiSuccess(false);
@@ -68,7 +68,7 @@ function FormLogin(){
         const getReUser = localStorage.getItem("rememberUser");
         if(getReUser) {
             const parseUser = JSON.parse(getReUser);
-            setValue('username', parseUser.username)
+            setValue('username', parseUser.username.toLowerCase().trim())
             setValue('password', parseUser.password)
             setValue('remember', parseUser.remember)
         }

@@ -10,7 +10,7 @@ function FormRegister(){
     const REGEX_PHONE = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
     const REGEX_ZIPCODE = /^[0-9 -]{1,30}$/;
     const REGEX_TEXT = /^[a-zA-ZĐđÀ-ỹ\s]{1,30}$/;
-    const REGEX_TEXT_NUMBER = /^[a-zA-Z0-9ĐđÀ-ỹ\s]+$/u;
+    const REGEX_USERNAME = /^[a-zA-Z0-9\s]+$/u;
    
     const [formValues, setFormValues] = useState({});
     const [success, setSuccess] = useState(false);
@@ -46,8 +46,8 @@ function FormRegister(){
     const password = useRef({});
     password.current = watch("password", "");
 
+    const values = getValues();
     const onSubmit = async () => {
-        const values = getValues();
         setFormValues(values)
         // api post thông tin user vừa đăng kí
         let APIPostData = await callApi(`/users`,"POST",
@@ -142,7 +142,7 @@ function FormRegister(){
                                             {...register("username", {
                                                 required: "Username is required.",
                                                 pattern: {
-                                                    value: REGEX_TEXT_NUMBER,
+                                                    value: REGEX_USERNAME,
                                                     message: "Username is not valid."
                                                 }
                                             })}
@@ -259,6 +259,9 @@ function FormRegister(){
                                     </label>
                                     <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                                         <div className={errors.address?.suite && "error" }>
+                                            <label htmlFor="suite" className="label-input !font-regular">
+                                                Suite
+                                            </label>
                                             <input className="input-el"
                                                 type="text"
                                                 name="suite"
@@ -266,7 +269,7 @@ function FormRegister(){
                                                 placeholder="Suite"
                                                 {...register("address.suite", {
                                                     pattern: {
-                                                        value: REGEX_TEXT_NUMBER,
+                                                        value: REGEX_TEXT,
                                                         message: "Suite is not valid."
                                                     }
                                                 })}
@@ -274,6 +277,9 @@ function FormRegister(){
                                             {errors.address?.suite && <p className="errorMsg">{errors.address?.suite.message}</p>}
                                         </div>
                                         <div className={errors.address?.street && "error" }>
+                                            <label htmlFor="street" className="label-input !font-regular">
+                                                Street
+                                            </label>
                                             <input className="input-el"
                                                 type="text"
                                                 name="street"
@@ -281,7 +287,7 @@ function FormRegister(){
                                                 placeholder="Street"
                                                 {...register("address.street", {
                                                     pattern: {
-                                                        value: REGEX_TEXT_NUMBER,
+                                                        value: REGEX_TEXT,
                                                         message: "Street is not valid."
                                                     }
                                                 })}
@@ -289,6 +295,9 @@ function FormRegister(){
                                             {errors.address?.street && <p className="errorMsg">{errors.address?.street.message}</p>}
                                         </div>
                                         <div className={errors.address?.city && "error" }>
+                                            <label htmlFor="city" className="label-input !font-regular">
+                                                City
+                                            </label>
                                             <input className="input-el"
                                                 type="text"
                                                 name="city"
@@ -296,7 +305,7 @@ function FormRegister(){
                                                 placeholder="City"
                                                 {...register("address.city", {
                                                     pattern: {
-                                                        value: REGEX_TEXT_NUMBER,
+                                                        value: REGEX_TEXT,
                                                         message: "City is not valid."
                                                     }
                                                 })}
@@ -304,6 +313,9 @@ function FormRegister(){
                                             {errors.address?.city && <p className="errorMsg">{errors.address?.city.message}</p>}
                                         </div>
                                         <div className={errors.address?.zipcode && "error" }>
+                                            <label htmlFor="zipcode" className="label-input !font-regular">
+                                                Zipcode
+                                            </label>
                                             <input className="input-el"
                                                 type="text"
                                                 name="zipcode"
