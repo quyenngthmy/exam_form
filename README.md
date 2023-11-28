@@ -21,7 +21,7 @@ User page: Displays recently logged in user information.
 
 Link: https://quyenngthmy.github.io/login_form/build/user.html
 
-User list: https://jsonplaceholder.typicode.com/users
+Link API: https://jsonplaceholder.typicode.com/users
 
 ## Table of Contents
 
