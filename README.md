@@ -2,7 +2,7 @@
 
 Login page (the form includes username, password, remember checkbox & a link forgot password)
 
-Link: https://quyenngthmy.github.io/login_form/build/
+Link Login page: https://quyenngthmy.github.io/login_form/build/
 
 To login:
 - Fill in the correct information of the existing username: username is not case sensitive.
@@ -11,7 +11,7 @@ To login:
   
 Register page (The form includes username, password, first name, last name, email, phone, address 
 
-Link: https://quyenngthmy.github.io/login_form/build/register.html
+Link Register page: https://quyenngthmy.github.io/login_form/build/register.html
 
 To register:
 - Fill in the required information including username, password, full name, email, phone.
@@ -19,7 +19,8 @@ To register:
 
 User page: Displays recently logged in user information.
 
-Link: https://quyenngthmy.github.io/login_form/build/user.html
+Link User page: https://quyenngthmy.github.io/login_form/build/user.html
+
 
 Link API: https://jsonplaceholder.typicode.com/users
 
