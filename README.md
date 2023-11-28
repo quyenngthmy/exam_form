@@ -2,17 +2,26 @@
 
 Login page (the form includes username, password, remember checkbox & a link forgot password)
 
+Link: https://quyenngthmy.github.io/login_form/build/
+
 To login:
 - Fill in the correct information of the existing username: username is not case sensitive.
 - Fill in any password with at least 6 required characters, containing at least one uppercase letter, lowercase letter, number and special symbol.
+- Because it is an emulator, currently you only need the correct username and enter any password
+  
+Register page (The form includes username, password, first name, last name, email, phone, address 
 
-Register page (The form includes username, password, first name, last name, email, phone, address ...)
+Link: https://quyenngthmy.github.io/login_form/build/register.html
 
 To register:
 - Fill in the required information including username, password, full name, email, phone
 - Address is not required
 
 User page: Displays recently logged in user information
+
+Link: https://quyenngthmy.github.io/login_form/build/user.html
+
+User list: https://jsonplaceholder.typicode.com/users
 
 ## Table of Contents
 
