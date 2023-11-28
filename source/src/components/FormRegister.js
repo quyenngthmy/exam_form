@@ -24,7 +24,7 @@ function FormRegister(){
         getValues,
         getFieldState
     } = useForm({
-        mode: "onChange",
+        mode: "onBlur",
         defaultValues: {
             formValues: ""
         }

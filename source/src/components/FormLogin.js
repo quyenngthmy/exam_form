@@ -29,9 +29,9 @@ function FormLogin(){
         if(formValues.remember) {
             localStorage.setItem("rememberUser", JSON.stringify(formValues));
         }
-        localStorage.setItem("currentUser", JSON.stringify(formValues));
         // filter user
         let getDataUser = getData.data.filter(user => user.username.toLowerCase() == formValues.username.toLowerCase())
+        localStorage.setItem("currentUser", JSON.stringify(getDataUser));
         if(getDataUser.length > 0 && formValues.password.length >= 6 && REGEX_PASSWORD.test(formValues.password)) {
             setNotiSuccess(true);
             setNotiFail(false);
