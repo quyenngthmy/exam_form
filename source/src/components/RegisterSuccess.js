@@ -58,7 +58,7 @@ function RegisterSuccess(userInfo){
                                         Address:
                                         </p>
                                         <p className="break-all col-span-2">
-                                            {userInfo.value.address.suite} {userInfo.value.address.street} {userInfo.value.address.city}
+                                            {userInfo.value.address.suite} {userInfo.value.address.street} {userInfo.value.address.city} {userInfo.value.address.zipcode}
                                         </p>
                                     </>
                                     :

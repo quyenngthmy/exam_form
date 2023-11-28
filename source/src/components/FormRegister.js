@@ -8,20 +8,10 @@ function FormRegister(){
     const REGEX_PASSWORD = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/;
     const REGEX_EMAIL = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
     const REGEX_PHONE = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+    const REGEX_ZIPCODE = /^[0-9 -]{1,30}$/;
     const REGEX_TEXT = /^[a-zA-ZĐđÀ-ỹ\s]{1,30}$/;
     const REGEX_TEXT_NUMBER = /^[a-zA-Z0-9ĐđÀ-ỹ\s]+$/u;
    
-    const initialValues = {
-        username: "", 
-        firstname: "", 
-        lastname: "", 
-        email: "", 
-        password: "", 
-        phone: "", 
-        address: {suite: "",
-        street: "",
-        city: ""}
-    };
     const [formValues, setFormValues] = useState({});
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -43,10 +33,13 @@ function FormRegister(){
             email: "", 
             password: "", 
             phone: "", 
-            address: {suite: "",
-            street: "",
-            city: ""}
+            address: {
+                suite: "",
+                street: "",
+                city: "",
+                zipcode: "",
             }
+        }
     });
 
     // dùng để check confirm password
@@ -67,6 +60,7 @@ function FormRegister(){
                 suite: values.address.suite,
                 street: values.address.street,
                 city: values.address.city,
+                zipcode: values.address.zipcode,
            }
        })
 
@@ -263,7 +257,7 @@ function FormRegister(){
                                     <label className="label-input">
                                         Address
                                     </label>
-                                    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+                                    <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                                         <div className={errors.address?.suite && "error" }>
                                             <input className="input-el"
                                                 type="text"
@@ -308,6 +302,21 @@ function FormRegister(){
                                                 })}
                                             />
                                             {errors.address?.city && <p className="errorMsg">{errors.address?.city.message}</p>}
+                                        </div>
+                                        <div className={errors.address?.zipcode && "error" }>
+                                            <input className="input-el"
+                                                type="text"
+                                                name="zipcode"
+                                                id="zipcode"
+                                                placeholder="Zipcode"
+                                                {...register("address.zipcode", {
+                                                    pattern: {
+                                                        value: REGEX_ZIPCODE,
+                                                        message: "Zipcode is not valid."
+                                                    }
+                                                })}
+                                            />
+                                            {errors.address?.zipcode && <p className="errorMsg">{errors.address?.zipcode.message}</p>}
                                         </div>
                                     </div>
                                 </div>
